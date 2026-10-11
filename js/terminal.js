@@ -108,7 +108,7 @@
           "about       open the about page",
           "projects    open projects",
           "photos      open photography",
-          "contact     email and github",
+          "contact     email",
           "whoami      print my name",
           "location    print where I am",
           "clear       clear the screen",
