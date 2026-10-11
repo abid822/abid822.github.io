@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 1100">
+  <rect width="780" height="1100" fill="#0c1018"/>
+  <rect x="70" y="60" width="640" height="980" fill="#101828" stroke="#6ef3e5" stroke-opacity="0.35"/>
+  <g stroke="#6ef3e5" stroke-opacity="0.18">
+    <path d="M70 300H710M70 540H710M70 780H710M283 60V1040M496 60V1040"/>
+  </g>
+  <g fill="#d4b8ff">
+    <circle cx="180" cy="190" r="8" opacity="0.9"/>
+    <circle cx="390" cy="220" r="5" opacity="0.55"/>
+    <circle cx="600" cy="170" r="7" opacity="0.75"/>
+    <circle cx="160" cy="430" r="6" opacity="0.4"/>
+    <circle cx="420" cy="460" r="9" opacity="0.85"/>
+    <circle cx="640" cy="400" r="5" opacity="0.5"/>
+    <circle cx="200" cy="670" r="7" opacity="0.7"/>
+    <circle cx="500" cy="690" r="6" opacity="0.45"/>
+    <circle cx="360" cy="900" r="8" opacity="0.8"/>
+    <circle cx="620" cy="860" r="5" opacity="0.55"/>
+  </g>
+  <g stroke="#6ef3e5" stroke-width="2" opacity="0.35">
+    <path d="M120 80 L150 1040M200 70 L230 1040M260 90 L240 1040"/>
+    <path d="M520 70 L560 1040M600 100 L640 1040M680 80 L700 1040"/>
+  </g>
+</svg>

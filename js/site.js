@@ -1,0 +1,113 @@
+(function () {
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.querySelector("#site-nav");
+  var label = toggle ? toggle.querySelector(".sr-only") : null;
+
+  function setOpen(open) {
+    if (!toggle || !nav) return;
+    nav.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (label) label.textContent = open ? "Close menu" : "Menu";
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      setOpen(!nav.classList.contains("open"));
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setOpen(false);
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!nav.classList.contains("open")) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      setOpen(false);
+    });
+
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.matchMedia("(min-width: 760px)").matches) setOpen(false);
+    });
+  }
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && document.documentElement.classList.contains("js")) {
+    var nodes = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12 }
+      );
+      nodes.forEach(function (node) {
+        observer.observe(node);
+      });
+    } else {
+      nodes.forEach(function (node) {
+        node.classList.add("in");
+      });
+    }
+  }
+
+  document.querySelectorAll("[data-year]").forEach(function (node) {
+    node.textContent = String(new Date().getFullYear());
+  });
+
+  var code = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a",
+  ];
+  var pos = 0;
+
+  document.addEventListener("keydown", function (event) {
+    var key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+    if (key === code[pos]) {
+      pos += 1;
+      if (pos === code.length) {
+        pos = 0;
+        grantExtraLife();
+      }
+      return;
+    }
+    pos = key === code[0] ? 1 : 0;
+  });
+
+  function grantExtraLife() {
+    document.body.classList.add("extra-life");
+    var toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      toast.className = "toast";
+      toast.setAttribute("role", "status");
+      document.body.appendChild(toast);
+    }
+    toast.textContent = "konami code accepted — extra life";
+    toast.hidden = false;
+    window.clearTimeout(grantExtraLife.timer);
+    grantExtraLife.timer = window.setTimeout(function () {
+      toast.hidden = true;
+      document.body.classList.remove("extra-life");
+    }, 4200);
+    document.dispatchEvent(new CustomEvent("konami"));
+  }
+})();

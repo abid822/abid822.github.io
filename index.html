@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abidur Chowdhury — Software Developer &amp; Software Test Engineer</title>
+  <meta name="description" content="Abidur Chowdhury is a software developer and Software test engineer in Orlando, Florida. Games, tests, and photos.">
+  <meta name="author" content="Abidur Chowdhury">
+  <meta name="theme-color" content="#07090f">
+  <link rel="canonical" href="https://abidur.net/">
+  <meta property="og:title" content="Abidur Chowdhury — Software Developer &amp; Software Test Engineer">
+  <meta property="og:description" content="Abidur Chowdhury is a software developer and Software test engineer in Orlando, Florida. Games, tests, and photos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abidur.net/">
+  <meta property="og:image" content="https://abidur.net/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abidur Chowdhury — Software Developer &amp; Software Test Engineer">
+  <meta name="twitter:description" content="Abidur Chowdhury is a software developer and Software test engineer in Orlando, Florida. Games, tests, and photos.">
+  <meta name="twitter:image" content="https://abidur.net/og.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="/">abidur<span>.net</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Menu</span>
+        <span class="burger" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/photography.html">Photography</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero-grid reveal">
+      <div>
+        <p class="eyebrow">~/abidur.net</p>
+        <h1>Abidur Chowdhury</h1>
+        <p class="lede">Software developer and Software test engineer in Orlando. I build things, then I try to break them.</p>
+        <div class="cta">
+          <a class="btn" href="/projects.html">Projects</a>
+          <a class="btn btn-alt" href="/photography.html">Photography</a>
+        </div>
+      </div>
+
+      <div class="terminal" role="region" aria-label="Interactive terminal">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="terminal-title">guest@abidur.net</span>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+          <noscript>
+            <p class="line line-cmd"><span class="pr" aria-hidden="true">&gt;</span> whoami</p>
+            <p class="line line-out">Abidur Chowdhury</p>
+            <p class="line line-cmd"><span class="pr" aria-hidden="true">&gt;</span> cat role.txt</p>
+            <p class="line line-out">Software Developer &amp; Software Test Engineer</p>
+            <p class="line line-cmd"><span class="pr" aria-hidden="true">&gt;</span> location</p>
+            <p class="line line-out">Orlando, Florida</p>
+          </noscript>
+        </div>
+        <form class="terminal-form" id="terminal-form">
+          <label class="sr-only" for="terminal-input">Terminal command. Type help for a list of commands.</label>
+          <span class="pr" aria-hidden="true">&gt;</span>
+          <input id="terminal-input" name="command" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="booting…" disabled>
+          <button class="sr-only" type="submit">Run command</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="qa reveal" aria-labelledby="qa-title">
+      <div class="qa-head">
+        <h2 id="qa-title">qa lab</h2>
+        <p id="qa-status" class="status status-fail">status: failing</p>
+      </div>
+      <p class="lede">A test isn't finished until something fails. There's a bug loose in the lab — squash it.</p>
+      <div class="lab" id="lab">
+        <button class="bug" id="bug" type="button" aria-label="Squash the bug">
+          <span class="bug-body">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <ellipse cx="32" cy="38" rx="14" ry="16" fill="#d4b8ff"/>
+              <circle cx="32" cy="20" r="8" fill="#6ef3e5"/>
+              <circle cx="29" cy="19" r="1.5" fill="#07090f"/>
+              <circle cx="35" cy="19" r="1.5" fill="#07090f"/>
+              <path d="M24 15 16 8M40 15l8-7" fill="none" stroke="#6ef3e5" stroke-width="2" stroke-linecap="round"/>
+              <path d="M18 32H8M18 40H7M18 48H10M46 32h10M46 40h11M46 48h8" fill="none" stroke="#d4b8ff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      <p id="qa-result" class="pass" hidden role="status">bug found → test passed</p>
+      <p id="qa-count" class="count" hidden>bugs found: 0</p>
+      <button class="btn btn-alt bug-reset" id="bug-reset" type="button" hidden>release another bug</button>
+      <noscript><p>The squash test needs JavaScript.</p></noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span data-year>2026</span> Abidur Chowdhury · Orlando, Florida</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/abid822" rel="me noopener noreferrer" target="_blank">GitHub</a></li>
+        <li><a href="mailto:email@abidur.net">email@abidur.net</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/js/site.js" defer></script>
+  <script src="/js/terminal.js" defer></script>
+  <script src="/js/qa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photography — Abidur Chowdhury</title>
+  <meta name="description" content="Photography by Abidur Chowdhury.">
+  <meta name="author" content="Abidur Chowdhury">
+  <meta name="theme-color" content="#07090f">
+  <link rel="canonical" href="https://abidur.net/photography.html">
+  <meta property="og:title" content="Photography — Abidur Chowdhury">
+  <meta property="og:description" content="Photography by Abidur Chowdhury.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abidur.net/photography.html">
+  <meta property="og:image" content="https://abidur.net/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Photography — Abidur Chowdhury">
+  <meta name="twitter:description" content="Photography by Abidur Chowdhury.">
+  <meta name="twitter:image" content="https://abidur.net/og.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="/">abidur<span>.net</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Menu</span>
+        <span class="burger" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/photography.html" aria-current="page">Photography</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="page-head reveal">
+      <p class="eyebrow">// photography</p>
+      <h1>photography</h1>
+      <p class="lede">A darkroom for pictures.</p>
+    </header>
+
+    <p class="empty" id="gallery-empty" hidden>No photos yet.</p>
+    <div class="gallery reveal" id="gallery"></div>
+    <noscript><p>The gallery needs JavaScript. Photo files live in /photos.</p></noscript>
+
+    <dialog id="lightbox" aria-label="Photo viewer">
+      <div class="lightbox-panel">
+        <img class="lightbox-photo" alt="">
+        <p class="lightbox-caption"></p>
+        <p class="lightbox-status sr-only" aria-live="polite"></p>
+        <div class="lightbox-controls">
+          <button type="button" data-dir="-1">Previous</button>
+          <button type="button" data-dir="1">Next</button>
+          <button type="button" data-close>Close</button>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span data-year>2026</span> Abidur Chowdhury · Orlando, Florida</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/abid822" rel="me noopener noreferrer" target="_blank">GitHub</a></li>
+        <li><a href="mailto:email@abidur.net">email@abidur.net</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/js/photos.js" defer></script>
+  <script src="/js/gallery.js" defer></script>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>
