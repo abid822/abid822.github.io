@@ -136,7 +136,7 @@
       return;
     }
     if (key === "bug" || key === "test") {
-      addLine("out", "bug is loose in the qa lab. go squash it.");
+      addLine("out", "bug is on the loose. go squash it.");
       var lab = document.getElementById("lab");
       if (lab) lab.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
       var bug = document.getElementById("bug");

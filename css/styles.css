@@ -478,23 +478,31 @@ h2 {
   box-shadow: inset 0 0 28px rgba(134, 239, 172, 0.12);
 }
 
-.bug {
+.bug-roam {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: calc(50% - 32px);
+  top: calc(50% - 32px);
+  width: 64px;
+  height: 64px;
+  transition: left 0.9s ease, top 0.9s ease;
+}
+
+.bug {
   width: 64px;
   height: 64px;
   padding: 0;
   border: 0;
   border-radius: 12px;
   background: transparent;
-  transition: transform 0.8s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
 }
 
 .bug-body {
   display: block;
   transform-origin: center;
+  animation: scuttle 0.7s ease-in-out infinite;
 }
 
 .bug svg {
@@ -1011,7 +1019,9 @@ body.extra-life .site-header {
     transition: none;
   }
 
+  .bug-roam,
   .bug,
+  .bug-body,
   .bug.squashed .bug-body,
   .pass,
   .project-card,
@@ -1039,6 +1049,12 @@ body.extra-life .site-header {
     border-color: rgba(110, 243, 229, 0.5);
     box-shadow: 0 0 26px rgba(110, 243, 229, 0.12);
   }
+}
+
+@keyframes scuttle {
+  0%,
+  100% { transform: rotate(-10deg) translateX(-2px); }
+  50% { transform: rotate(10deg) translateX(2px); }
 }
 
 @keyframes squash {

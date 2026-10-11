@@ -82,11 +82,12 @@
 
     <section class="qa reveal" aria-labelledby="qa-title">
       <div class="qa-head">
-        <h2 id="qa-title">qa lab</h2>
+        <h2 id="qa-title">bug hunt</h2>
         <p id="qa-status" class="status status-fail">status: failing</p>
       </div>
-      <p class="lede">A test isn't finished until something fails. There's a bug loose in the lab — squash it.</p>
+      <p class="lede">One got out. Tap it before it gets away.</p>
       <div class="lab" id="lab">
+        <div class="bug-roam" id="bug-roam">
         <button class="bug" id="bug" type="button" aria-label="Squash the bug">
           <span class="bug-body">
             <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -99,6 +100,7 @@
             </svg>
           </span>
         </button>
+        </div>
       </div>
       <p id="qa-result" class="pass" hidden role="status">bug found → test passed</p>
       <p id="qa-count" class="count" hidden>bugs found: 0</p>

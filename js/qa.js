@@ -1,39 +1,42 @@
 (function () {
   var lab = document.getElementById("lab");
+  var roam = document.getElementById("bug-roam");
   var bug = document.getElementById("bug");
   var status = document.getElementById("qa-status");
   var result = document.getElementById("qa-result");
   var count = document.getElementById("qa-count");
   var reset = document.getElementById("bug-reset");
-  if (!lab || !bug || !status || !result || !count || !reset) return;
+  if (!lab || !roam || !bug || !status || !result || !count || !reset) return;
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timer = 0;
   var found = 0;
+  var loose = true;
+  var lastHop = 0;
 
   function place(random) {
+    var width = lab.clientWidth;
+    var height = lab.clientHeight;
+    if (!width || !height) return;
     if (reduce) {
-      bug.style.left = "50%";
-      bug.style.top = "50%";
-      bug.style.transform = "translate(-50%, -50%)";
+      roam.style.left = "calc(50% - 32px)";
+      roam.style.top = "calc(50% - 32px)";
       return;
     }
     var pad = 10;
-    var maxX = Math.max(0, lab.clientWidth - bug.offsetWidth - pad * 2);
-    var maxY = Math.max(0, lab.clientHeight - bug.offsetHeight - pad * 2);
+    var maxX = Math.max(0, width - roam.offsetWidth - pad * 2);
+    var maxY = Math.max(0, height - roam.offsetHeight - pad * 2);
     var x = pad + (random ? Math.random() * maxX : maxX / 2);
     var y = pad + (random ? Math.random() * maxY : maxY / 2);
-    bug.style.left = "0px";
-    bug.style.top = "0px";
-    bug.style.transform = "translate(" + x + "px, " + y + "px)";
+    roam.style.left = x + "px";
+    roam.style.top = y + "px";
   }
 
-  function wander() {
-    window.clearInterval(timer);
-    if (reduce) return;
-    timer = window.setInterval(function () {
+  function frame(now) {
+    if (loose && !reduce && now - lastHop > 900) {
+      lastHop = now;
       place(true);
-    }, 1100);
+    }
+    window.requestAnimationFrame(frame);
   }
 
   function showFailing() {
@@ -45,10 +48,12 @@
     reset.hidden = true;
     bug.classList.remove("squashed");
     bug.disabled = false;
+    loose = true;
+    lastHop = 0;
   }
 
   bug.addEventListener("click", function () {
-    window.clearInterval(timer);
+    loose = false;
     bug.classList.add("squashed");
     bug.disabled = true;
     found += 1;
@@ -65,14 +70,13 @@
   reset.addEventListener("click", function () {
     showFailing();
     place(true);
-    wander();
     bug.focus();
   });
 
-  bug.style.transition = "none";
   place(false);
-  window.requestAnimationFrame(function () {
-    bug.style.transition = "";
-    wander();
+  window.requestAnimationFrame(frame);
+  window.addEventListener("resize", function () {
+    if (!loose) return;
+    place(true);
   });
 })();
