@@ -83,6 +83,21 @@
     }
   }
 
+  var jokes = [
+    "Why did the test go to therapy? Too many unresolved issues.",
+    "My code told a joke. Nobody laughed. It was a dry run.",
+    "QA walked into a bar. Then a bar. Then a bar. Then null.",
+    "A bug and a feature walked into standup. Nobody could tell them apart.",
+    "The suite is like a smoke alarm: loudest right after I start cooking.",
+    "Why do developers prefer dark mode? Light attracts bugs.",
+    "The flaky test and I are talking again. It passed on the third try.",
+    "I asked the build if it was okay. It said it depends.",
+    "They said ship it. The bug heard ship and packed a suitcase.",
+    "Assertion failed: expected coffee, received another meeting.",
+  ];
+
+  var matrixToken = 0;
+
   function go(href, message) {
     addLine("out", message);
     window.setTimeout(function () {
@@ -90,15 +105,135 @@
     }, reduce ? 0 : 400);
   }
 
+  function stopMatrix() {
+    matrixToken += 1;
+    var rain = document.querySelector(".matrix-rain");
+    if (rain) rain.remove();
+  }
+
+  function playMatrix() {
+    if (reduce) {
+      addLine("out", "the matrix has you.");
+      return;
+    }
+    stopMatrix();
+    var token = matrixToken;
+    var shell = output.closest(".terminal");
+    var rain = document.createElement("pre");
+    rain.className = "matrix-rain";
+    rain.setAttribute("aria-hidden", "true");
+    rain.style.position = "absolute";
+    rain.style.left = "0";
+    rain.style.right = "0";
+    rain.style.top = output.offsetTop + "px";
+    rain.style.height = output.clientHeight + "px";
+    rain.style.margin = "0";
+    rain.style.overflow = "hidden";
+    rain.style.zIndex = "2";
+    rain.style.pointerEvents = "none";
+    rain.style.color = "#86efac";
+    rain.style.background = "#070b12";
+    rain.style.font = "12px/1.15 ui-monospace, monospace";
+    shell.style.position = "relative";
+    shell.appendChild(rain);
+
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var started = performance.now();
+    var heads = [];
+
+    function frame(now) {
+      if (token !== matrixToken) return;
+      if (now - started >= 1500) {
+        rain.remove();
+        addLine("out", "wake up, neo… (back to work)");
+        return;
+      }
+      var cols = Math.max(8, Math.floor(rain.clientWidth / 10));
+      var rows = Math.max(6, Math.floor(rain.clientHeight / 14));
+      while (heads.length < cols) heads.push(Math.floor(Math.random() * rows));
+      var lines = [];
+      var r;
+      var c;
+      for (r = 0; r < rows; r += 1) lines.push("");
+      for (c = 0; c < cols; c += 1) {
+        heads[c] = (heads[c] + 1) % (rows + 6);
+        for (r = 0; r < rows; r += 1) {
+          var trail = heads[c] - r;
+          lines[r] += trail >= 0 && trail < 7 ? glyphs.charAt(Math.floor(Math.random() * glyphs.length)) : " ";
+        }
+      }
+      rain.textContent = lines.join("\n");
+      window.requestAnimationFrame(frame);
+    }
+
+    window.requestAnimationFrame(frame);
+  }
+
+  function runTests() {
+    var lines = [
+      "✓ renders homepage",
+      "✓ squash the bug is squashable",
+      "✓ privacy page loads",
+      "✓ coffee level > 0",
+    ];
+    if (Math.random() < 0.1) lines.push("⚠ 1 flaky test (passed on retry)");
+    lines.push("12 passed, 0 failed ✓ all green");
+    if (reduce) {
+      lines.forEach(function (line) {
+        addLine("out", line);
+      });
+      return;
+    }
+    var index = 0;
+    function next() {
+      if (index >= lines.length) return;
+      addLine("out", lines[index]);
+      index += 1;
+      if (index < lines.length) window.setTimeout(next, 260);
+    }
+    next();
+  }
+
   function run(raw) {
     var key = raw.trim().toLowerCase().replace(/\s+/g, " ");
     if (!key) return;
     if (key === "clear") {
+      stopMatrix();
       output.replaceChildren();
       return;
     }
 
     addLine("cmd", raw.trim());
+
+    if (key === "help --all") {
+      addLine(
+        "out",
+        [
+          "help            list commands",
+          "help --all      list every command",
+          "about           open the about page",
+          "projects        open projects",
+          "photos          open photography",
+          "contact         email",
+          "whoami          print my name",
+          "location        print where I am",
+          "clear           clear the screen",
+          "sudo            you can try",
+          "coffee          brew a cup",
+          "joke            tell a joke",
+          "matrix          enter the matrix",
+          "run tests       run the suite",
+          "npm test        same suite",
+          "weather         orlando forecast",
+          "hire            start a conversation",
+          "exit            try to leave",
+          "ls              list files",
+          "cat secrets.txt open the secret file",
+          "history         show typed commands",
+        ].join("\n")
+      );
+      return;
+    }
 
     if (key === "help") {
       addLine(
@@ -113,6 +248,7 @@
           "location    print where I am",
           "clear       clear the screen",
           "sudo        you can try",
+          "+ 10 hidden commands, try help --all",
         ].join("\n")
       );
       return;
@@ -145,6 +281,50 @@
     }
     if (key === "hello" || key === "hi") {
       return addLine("out", "hey. type help if you want the real commands.");
+    }
+    if (key === "coffee") {
+      addLine(
+        "out",
+        ["   ( (", "    ) )", " .------.", " |      |]", " '------'"].join("\n")
+      );
+      return addLine("out", "brewing… ☕ caffeine levels nominal.");
+    }
+    if (key === "joke") {
+      return addLine("out", jokes[Math.floor(Math.random() * jokes.length)]);
+    }
+    if (key === "matrix") {
+      playMatrix();
+      return;
+    }
+    if (key === "run tests" || key === "npm test") {
+      runTests();
+      return;
+    }
+    if (key === "weather") {
+      return addLine("out", "Orlando, FL: hot, humid, 100% chance of afternoon thunderstorms ⛈");
+    }
+    if (key === "hire") {
+      return addLine("out", "Hiring? Let's talk: email@abidur.net");
+    }
+    if (key === "exit") {
+      return addLine("out", "nice try. there is no escape. (type clear instead)");
+    }
+    if (key === "ls") {
+      return addLine("out", "about.txt  projects/  photos/  role.txt  secrets.txt");
+    }
+    if (key === "cat secrets.txt") {
+      addLine("err", "Permission denied.");
+      return addLine("out", "…fine: the secret is I write tests before coffee.");
+    }
+    if (key === "history") {
+      return addLine(
+        "out",
+        history
+          .map(function (cmd, index) {
+            return index + 1 + "  " + cmd;
+          })
+          .join("\n")
+      );
     }
 
     addLine("err", "zsh: command not found: " + raw.trim());
