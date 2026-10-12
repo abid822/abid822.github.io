@@ -920,6 +920,25 @@ a.store:hover {
   font-size: 0.88rem;
 }
 
+.cursor-glow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(110, 243, 229, 0.2), rgba(168, 85, 247, 0.1) 42%, transparent 70%);
+  transform: translate(-100vw, -100vh);
+  transition: opacity 0.35s ease;
+}
+
+.cursor-glow.on {
+  opacity: 1;
+}
+
 .toast {
   position: fixed;
   left: 50%;
@@ -1017,6 +1036,10 @@ body.extra-life .site-header {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .cursor-glow {
+    display: none;
   }
 
   .bug-roam,

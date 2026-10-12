@@ -37,6 +37,32 @@
   }
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+  if (!reduce && finePointer && !coarsePointer) {
+    var glow = document.createElement("div");
+    glow.className = "cursor-glow";
+    glow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(glow);
+    document.addEventListener(
+      "pointermove",
+      function (event) {
+        if (event.pointerType !== "mouse") {
+          glow.classList.remove("on");
+          return;
+        }
+        glow.classList.add("on");
+        glow.style.transform =
+          "translate(" + event.clientX + "px, " + event.clientY + "px) translate(-50%, -50%)";
+      },
+      { passive: true }
+    );
+    document.addEventListener("pointerout", function (event) {
+      if (!event.relatedTarget && !event.toElement) glow.classList.remove("on");
+    });
+  }
+
   if (!reduce && document.documentElement.classList.contains("js")) {
     var nodes = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
