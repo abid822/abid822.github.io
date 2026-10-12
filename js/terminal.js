@@ -86,7 +86,8 @@
   function go(href, message) {
     addLine("out", message);
     window.setTimeout(function () {
-      window.location.href = href;
+      if (typeof window.siteGo === "function") window.siteGo(href);
+      else window.location.href = href;
     }, reduce ? 0 : 400);
   }
 
@@ -108,7 +109,7 @@
           "about       open the about page",
           "projects    open projects",
           "photos      open photography",
-          "contact     email",
+          "email",
           "whoami      print my name",
           "location    print where I am",
           "clear       clear the screen",
@@ -136,7 +137,7 @@
       return;
     }
     if (key === "bug" || key === "test") {
-      addLine("out", "bug is on the loose. go squash it.");
+      addLine("out", "Squash the Bug is on. go squash it.");
       var lab = document.getElementById("lab");
       if (lab) lab.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
       var bug = document.getElementById("bug");

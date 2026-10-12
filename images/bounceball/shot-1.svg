@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="640" viewBox="0 0 360 640" role="img" aria-label="Orange ball high between two green pillars">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#49b7f0"/>
+      <stop offset="0.62" stop-color="#f3d56a"/>
+      <stop offset="1" stop-color="#e7b45a"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="640" fill="url(#sky)"/>
+  <rect y="520" width="360" height="120" fill="#e6c07b"/>
+  <rect y="560" width="360" height="80" fill="#c9844a"/>
+  <g fill="#6fbf45">
+    <rect x="36" y="250" width="78" height="270" rx="28"/>
+    <rect x="246" y="250" width="78" height="270" rx="28"/>
+  </g>
+  <g fill="#8ed85f">
+    <ellipse cx="75" cy="292" rx="34" ry="16"/>
+    <ellipse cx="75" cy="348" rx="34" ry="16"/>
+    <ellipse cx="75" cy="404" rx="34" ry="16"/>
+    <ellipse cx="285" cy="292" rx="34" ry="16"/>
+    <ellipse cx="285" cy="348" rx="34" ry="16"/>
+    <ellipse cx="285" cy="404" rx="34" ry="16"/>
+  </g>
+  <circle cx="180" cy="210" r="46" fill="#ff8a1e"/>
+  <circle cx="166" cy="198" r="8" fill="#1b1b1b"/>
+  <circle cx="196" cy="198" r="8" fill="#1b1b1b"/>
+  <path d="M164 222c8 10 26 10 34 0" fill="none" stroke="#1b1b1b" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#fff">
+    <circle cx="150" cy="120" r="3"/>
+    <circle cx="168" cy="108" r="2.5"/>
+    <circle cx="188" cy="98" r="2"/>
+  </g>
+</svg>
